@@ -42,7 +42,7 @@ function restricted(req, res, next) {
 }
 
 
-router.get('/users', restricted, (req,res) => {
+router.get('/users', restricted ,(req,res) => {
    DB
        .getUser()
        .then(user => {
