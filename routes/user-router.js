@@ -42,7 +42,7 @@ function restricted(req, res, next) {
 }
 
 
-router.get('/users', restricted ,(req,res) => {
+router.get('/users', restricted,(req,res) => {
    DB
        .getUser()
        .then(user => {
@@ -63,7 +63,8 @@ router.post('/register', (req, res) => {
     DB
     .add(user)
     .then(saved => {
-        res.status(201).json(saved)
+        const token = generateToken(saved);
+        res.status(201).json({...saved , token})
     })
     .catch(error => {
         res.status(500).json({error})
